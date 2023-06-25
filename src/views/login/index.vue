@@ -181,7 +181,7 @@ $light_gray:#eee;
 
   background-image: url('../../assets/bg.jpg');
   background-size: 100%;
-  
+
   display: flex;
   align-items: center;
 
