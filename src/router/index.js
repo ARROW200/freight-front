@@ -58,15 +58,33 @@ export const constantRoutes = [
   {
     path: '/basicInfo',
     component: Layout,
-    redirect: '/basicInfo/staff',
+    redirect: '/basicInfo/user',
     name: 'BasicInfo',
     meta: { title: '基本信息管理', icon: 'el-icon-s-help' },
     children: [
       {
-        path: 'staff',
-        name: 'Staff',
-        component: () => import('@/views/basicInfo/staff'),
-        meta: { title: '人员信息管理', icon: 'table' }
+        path: 'user',
+        name: 'User',
+        component: () => import('@/views/basicInfo/user'),
+        meta: { title: '用户管理', icon: 'table' }
+      },
+      {
+        path: 'driver',
+        name: 'Driver',
+        component: () => import('@/views/basicInfo/driver'),
+        meta: { title: '司机信息管理', icon: 'tree' }
+      },
+      {
+        path: 'repairman',
+        name: 'Repairman',
+        component: () => import('@/views/basicInfo/repairman'),
+        meta: { title: '修理工信息管理', icon: 'tree' }
+      },
+      {
+        path: 'purchaser',
+        name: 'purchaser',
+        component: () => import('@/views/basicInfo/purchaser'),
+        meta: { title: '采购员信息管理', icon: 'tree' }
       },
       {
         path: 'vehicle',
@@ -107,7 +125,13 @@ export const constantRoutes = [
         name: 'VehicleMaintenanceRecord',
         component: () => import('@/views/maintenance/vehicleMaintenanceRecord'),
         meta: { title: '车辆维修记录', icon: 'tree' }
-      }
+      },
+      {
+        path: 'use',
+        name: 'Use',
+        component: () => import('@/views/maintenance/use'),
+        meta: { title: '物资使用记录', icon: 'tree' }
+      },
     ]
   },
 
@@ -129,6 +153,34 @@ export const constantRoutes = [
         name: 'Task',
         component: () => import('@/views/dispatch/task'),
         meta: { title: '运输记录管理', icon: 'tree' }
+      }
+    ]
+  },
+
+  {
+    path: '/stock',
+    component: Layout,
+    redirect: '/stock/material',
+    name: 'Stock',
+    meta: { title: '购销存管理', icon: 'el-icon-s-help' },
+    children: [
+      {
+        path: 'material',
+        name: 'Material',
+        component: () => import('@/views/stock/material'),
+        meta: { title: '物资管理', icon: 'table' }
+      },
+      {
+        path: 'purchaseMaterial',
+        name: 'PurchaseMaterial',
+        component: () => import('@/views/stock/purchaseMaterial'),
+        meta: { title: '物资购销管理', icon: 'table' }
+      },
+      {
+        path: 'purchaseVehicle',
+        name: 'PurchaseVehicle',
+        component: () => import('@/views/stock/purchaseVehicle'),
+        meta: { title: '车辆购销管理', icon: 'tree' }
       }
     ]
   },
