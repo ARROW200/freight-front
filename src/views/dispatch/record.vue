@@ -6,6 +6,7 @@
       <el-input v-model="searchModel.driverName" placeholder="司机" clearable></el-input>
       <el-input v-model="searchModel.freightId" placeholder="货物号" clearable></el-input>
       <el-input v-model="searchModel.recordId" placeholder="记录号" clearable></el-input>
+      <el-input v-model="searchModel.taskId" placeholder="任务号" clearable></el-input>
       <el-button @click="getRecordList" type="primary" round icon="el-icon-search">查询</el-button>
       <el-button @click="openAddEditUI()" type="primary" circle icon="el-icon-plus"></el-button>
     </el-card>
@@ -36,15 +37,18 @@
         </el-table-column>
         <el-table-column prop="endAddress" label="收货地址" width="200">
         </el-table-column>
+        <el-table-column prop="taskId" label="任务号" width="200">
+        </el-table-column>
         <el-table-column prop="status" label="状态" width="100">
           <template slot-scope="scope">
-            <el-tag v-if="scope.row.status == 0">运送中</el-tag>
+            <el-tag v-if="scope.row.status == 2">运送中</el-tag>
             <el-tag v-if="scope.row.status == 1" type="success">已送达</el-tag>
           </template>
         </el-table-column>
         <el-table-column label="操作" width="200">
           <template slot-scope="scope">
-            <el-button @click="openUpdateEditUI(scope.row.recordId)" type="primary" icon="el-icon-edit" circle></el-button>
+            <el-button @click="openUpdateEditUI(scope.row.recordId)" type="primary" icon="el-icon-edit" circle>
+            </el-button>
             <el-button @click="deleteRecord(scope.row.recordId)" type="danger" icon="el-icon-delete" circle></el-button>
           </template>
         </el-table-column>
@@ -82,9 +86,12 @@
         <el-form-item label="结束时间" :label-width="formLabelWidth" prop="endTime">
           <el-date-picker v-model="recordForm.endTime" type="date">
           </el-date-picker>
+        <el-form-item label="任务号" :label-width="formLabelWidth" prop="taskId">
+          <el-input v-model="recordForm.taskId" autocomplete="off"></el-input>
+        </el-form-item>
         </el-form-item>
         <el-form-item label="状态" :label-width="formLabelWidth">
-          <el-switch v-model="recordForm.status" :active-value="1" :inactive-value="0">
+          <el-switch v-model="recordForm.status" :active-value="1" :inactive-value="2">
           </el-switch>
         </el-form-item>
       </el-form>
@@ -144,6 +151,11 @@
             required: true,
             message: '请选择开始时间',
             trigger: 'change'
+          }],
+          taskId: [{
+            required: true,
+            message: '请输入任务号',
+            trigger: 'blur'
           }]
         }
       };
@@ -151,23 +163,23 @@
     methods: {
       deleteRecord(recordId) {
         this.$confirm(`确认删除${recordId}号记录吗`, '提示', {
-                  confirmButtonText: '确定',
-                  cancelButtonText: '取消',
-                  type: 'warning'
-                }).then(() => {
-                  recordApi.deleteRecordById(recordId).then(response => {
-                    this.$message({
-                      type: 'success',
-                      message: response.message
-                    });
-                    this.getRecordList();
-                  });
-                }).catch(() => {
-                  this.$message({
-                    type: 'info',
-                    message: '已取消删除'
-                  });
-                });
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          recordApi.deleteRecordById(recordId).then(response => {
+            this.$message({
+              type: 'success',
+              message: response.message
+            });
+            this.getRecordList();
+          });
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消删除'
+          });
+        });
       },
       saveRecord() {
         this.$refs.recordFormRef.validate((valid) => {

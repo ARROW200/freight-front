@@ -11,7 +11,8 @@ export default{
         vehicleId: searchModel.vehicleId,
         driverName: searchModel.driverName,
         freightId: searchModel.freightId,
-        recordId: searchModel.recordId
+        recordId: searchModel.recordId,
+        taskId: searchModel.taskId
       }
     });
   },

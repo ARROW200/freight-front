@@ -151,7 +151,7 @@
         this.dialogFormVisible = true;
       },
       openUpdateEditUI(userId) {
-        this.title = "修改用户";
+        this.title = "修改用户信息";
         this.userForm.userId = userId;
         userApi.getUserById(userId).then(response => {
           this.userForm = response.data;
