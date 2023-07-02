@@ -90,7 +90,7 @@
             trigger: 'blur'
           }],
           password: [{
-            required: true,
+            required: false,
             message: '请输入密码',
             trigger: 'blur'
           },

@@ -18,7 +18,7 @@
         </el-table-column>
         <el-table-column prop="staffId" label="员工号" width="100">
         </el-table-column>
-        <el-table-column prop="staffName" label="姓名" width="120">
+        <el-table-column prop="staffName" label="姓名" width="100">
         </el-table-column>
         <el-table-column prop="gender" label="性别" width="100">
           <template slot-scope="scope">
@@ -30,9 +30,9 @@
         </el-table-column>
         <el-table-column prop="staffAddress" label="住址" width="200">
         </el-table-column>
-        <el-table-column prop="phone" label="联系电话" width="200">
+        <el-table-column prop="phone" label="联系电话" width="160">
         </el-table-column>
-        <el-table-column label="操作" width="200">
+        <el-table-column label="操作" width="150">
           <template slot-scope="scope">
             <el-button @click="openUpdateEditUI(scope.row.staffId)" type="primary" icon="el-icon-edit" circle></el-button>
             <el-button @click="deleteStaff(scope.row.staffId)" type="danger" icon="el-icon-delete" circle></el-button>
@@ -183,7 +183,7 @@
       },
       handleSizeChange(pageSize) {
         this.searchModel.pageSize = pageSize;
-        this.getstaffList(3);
+        this.getStaffList(3);
       },
       handleCurrentChange(pageNo) {
         this.searchModel.pageNo = pageNo;
@@ -198,7 +198,7 @@
       }
     },
     created() {
-      this.getStaffList();
+      this.getStaffList(3);
     }
   };
 </script>
