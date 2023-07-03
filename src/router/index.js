@@ -51,7 +51,7 @@ export const constantRoutes = [
       path: 'dashboard',
       name: 'Dashboard',
       component: () => import('@/views/dashboard/index'),
-      meta: { title: '首页', icon: 'dashboard', affix: true }
+      meta: { title: '首页', icon: 'home', affix: true }
     }]
   },
 
@@ -60,49 +60,49 @@ export const constantRoutes = [
     component: Layout,
     redirect: '/basicInfo/user',
     name: 'BasicInfo',
-    meta: { title: '基本信息管理', icon: 'el-icon-s-help' },
+    meta: { title: '基本信息管理', icon: 'basicInfo' },
     children: [
       {
         path: 'user',
         name: 'User',
         component: () => import('@/views/basicInfo/user'),
-        meta: { title: '用户管理', icon: 'table' }
-      },
-      {
-        path: 'driver',
-        name: 'Driver',
-        component: () => import('@/views/basicInfo/driver'),
-        meta: { title: '司机信息管理', icon: 'tree' }
+        meta: { title: '用户管理', icon: 'user' }
       },
       {
         path: 'repairman',
         name: 'Repairman',
         component: () => import('@/views/basicInfo/repairman'),
-        meta: { title: '修理工信息管理', icon: 'tree' }
+        meta: { title: '修理工信息管理', icon: 'staff' }
+      },
+      {
+        path: 'driver',
+        name: 'Driver',
+        component: () => import('@/views/basicInfo/driver'),
+        meta: { title: '司机信息管理', icon: 'staff' }
       },
       {
         path: 'purchaser',
         name: 'purchaser',
         component: () => import('@/views/basicInfo/purchaser'),
-        meta: { title: '采购员信息管理', icon: 'tree' }
+        meta: { title: '采购员信息管理', icon: 'staff' }
       },
       {
         path: 'vehicle',
         name: 'Vehicle',
         component: () => import('@/views/basicInfo/vehicle'),
-        meta: { title: '车辆信息管理', icon: 'tree' }
+        meta: { title: '车辆信息管理', icon: 'vehicle' }
       },
       {
         path: 'company',
         name: 'Company',
         component: () => import('@/views/basicInfo/company'),
-        meta: { title: '公司信息管理', icon: 'table' }
+        meta: { title: '公司信息管理', icon: 'company' }
       },
       {
         path: 'freight',
         name: 'Freight',
         component: () => import('@/views/basicInfo/freight'),
-        meta: { title: '货物信息管理', icon: 'tree' }
+        meta: { title: '货物信息管理', icon: 'freight' }
       }
     ]
   },
@@ -112,25 +112,25 @@ export const constantRoutes = [
     component: Layout,
     redirect: '/maintenance/repairmanMaintenanceRecord',
     name: 'Maintenance',
-    meta: { title: '汽车检修管理', icon: 'el-icon-s-help' },
+    meta: { title: '汽车检修管理', icon: 'maintenance' },
     children: [
       {
         path: 'repairmanMaintenanceRecord',
         name: 'RepairmanMaintenanceRecord',
         component: () => import('@/views/maintenance/repairmanMaintenanceRecord'),
-        meta: { title: '修理工维修记录', icon: 'table' }
+        meta: { title: '修理工维修记录', icon: 'record' }
       },
       {
         path: 'vehicleMaintenanceRecord',
         name: 'VehicleMaintenanceRecord',
         component: () => import('@/views/maintenance/vehicleMaintenanceRecord'),
-        meta: { title: '车辆维修记录', icon: 'tree' }
+        meta: { title: '车辆维修记录', icon: 'record' }
       },
       {
         path: 'use',
         name: 'Use',
         component: () => import('@/views/maintenance/use'),
-        meta: { title: '物资使用记录', icon: 'tree' }
+        meta: { title: '物资使用记录', icon: 'material' }
       },
     ]
   },
@@ -140,19 +140,19 @@ export const constantRoutes = [
     component: Layout,
     redirect: '/dispatch/record',
     name: 'Dispatch',
-    meta: { title: '运输调度管理', icon: 'el-icon-s-help' },
+    meta: { title: '运输调度管理', icon: 'vehicle' },
     children: [
       {
         path: 'record',
         name: 'Record',
         component: () => import('@/views/dispatch/record'),
-        meta: { title: '单车运输记录管理', icon: 'table' }
+        meta: { title: '单车运输记录管理', icon: 'record' }
       },
       {
         path: 'task',
         name: 'Task',
         component: () => import('@/views/dispatch/task'),
-        meta: { title: '运输记录管理', icon: 'tree' }
+        meta: { title: '运输记录管理', icon: 'record' }
       }
     ]
   },
@@ -168,19 +168,19 @@ export const constantRoutes = [
         path: 'material',
         name: 'Material',
         component: () => import('@/views/stock/material'),
-        meta: { title: '物资管理', icon: 'table' }
+        meta: { title: '物资管理', icon: 'material' }
       },
       {
         path: 'purchaseMaterial',
         name: 'PurchaseMaterial',
         component: () => import('@/views/stock/purchaseMaterial'),
-        meta: { title: '物资购销管理', icon: 'table' }
+        meta: { title: '物资购销管理', icon: 'freight' }
       },
       {
         path: 'purchaseVehicle',
         name: 'PurchaseVehicle',
         component: () => import('@/views/stock/purchaseVehicle'),
-        meta: { title: '车辆购销管理', icon: 'tree' }
+        meta: { title: '车辆购销管理', icon: 'vehicle' }
       }
     ]
   },
@@ -190,7 +190,7 @@ export const constantRoutes = [
     component: Layout,
     redirect: '/statistic/reportForm',
     name: 'Statistic',
-    meta: { title: '数据统计分析', icon: 'el-icon-s-help' },
+    meta: { title: '数据统计分析', icon: 'statistic' },
     children: [
       {
         path: 'reportForm',
