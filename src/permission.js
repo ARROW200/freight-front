@@ -31,10 +31,16 @@ router.beforeEach(async(to, from, next) => {
         next()
       } else {
         try {
+          const role = localStorage.getItem('role')
+          const accessRoutes = await store.dispatch('permission/generateRoutes', role)
+          await store.dispatch('user/changeInit')
+          router.addRoutes(accessRoutes)
+          let lastRou = [{ path: '*', redirect: '/404' }]
+          router.addRoutes(lastRou)
           // get user info
           await store.dispatch('user/getInfo')
 
-          next()
+          next({ ...to, replace: true })
         } catch (error) {
           // remove token and go to login page to re-login
           await store.dispatch('user/resetToken')

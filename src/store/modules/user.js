@@ -6,7 +6,9 @@ const getDefaultState = () => {
   return {
     token: getToken(),
     name: '',
-    avatar: ''
+    avatar: '',
+    role: 0,
+    init: false
   }
 }
 
@@ -24,16 +26,28 @@ const mutations = {
   },
   SET_AVATAR: (state, avatar) => {
     state.avatar = avatar
+  },
+  SET_ROLE: (state, role) => {
+    state.role = role
+  },
+  SET_INIT: (state, data) => {
+    state.init = data
   }
 }
 
 const actions = {
+  changeInit({ commit }) {
+    commit('SET_INIT', true)
+  },
   // user login
   login({ commit }, userInfo) {
     const { username, password } = userInfo
     return new Promise((resolve, reject) => {
       login({ username: username.trim(), password: password }).then(response => {
         const { data } = response
+        const role = data.role
+        localStorage.setItem('role', role)
+        commit('SET_ROLE', role)
         commit('SET_TOKEN', data.token)
         setToken(data.token)
         resolve()

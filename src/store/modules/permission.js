@@ -1,4 +1,5 @@
-import { asyncRoutes, constantRoutes } from '@/router'
+import { asyncRoutes4, asyncRoutes3, asyncRoutes2, asyncRoutes, constantRoutes } from '@/router'
+
 
 /**
  * Use meta.role to determine if the current user has permission
@@ -6,8 +7,9 @@ import { asyncRoutes, constantRoutes } from '@/router'
  * @param route
  */
 function hasPermission(roles, route) {
+  let arr = [roles]
   if (route.meta && route.meta.roles) {
-    return roles.some(role => route.meta.roles.includes(role))
+    return arr.some(role => route.meta.roles.includes(role))
   } else {
     return true
   }
@@ -20,9 +22,10 @@ function hasPermission(roles, route) {
  */
 export function filterAsyncRoutes(routes, roles) {
   const res = []
-
+  console.log(roles)
   routes.forEach(route => {
     const tmp = { ...route }
+    console.log(tmp)
     if (hasPermission(roles, tmp)) {
       if (tmp.children) {
         tmp.children = filterAsyncRoutes(tmp.children, roles)
@@ -42,19 +45,30 @@ const state = {
 const mutations = {
   SET_ROUTES: (state, routes) => {
     state.addRoutes = routes
-    state.routes = constantRoutes.concat(routes)
+    // state.routes = constantRoutes.concat(routes)
+    let rou = constantRoutes
+    rou.splice(2, 0, ...routes)
+    state.routes = rou
   }
 }
 
 const actions = {
   generateRoutes({ commit }, roles) {
     return new Promise(resolve => {
-      let accessedRoutes
-      if (roles.includes('admin')) {
+      let accessedRoutes = []
+      console.log(roles)
+      if (roles.includes(1)) {
         accessedRoutes = asyncRoutes || []
-      } else {
-        accessedRoutes = filterAsyncRoutes(asyncRoutes, roles)
+      } else if (roles.includes(2)) {
+        accessedRoutes = asyncRoutes2 || []
+      } else if (roles.includes(3)) {
+        accessedRoutes = asyncRoutes3 || []
+      } else if (roles.includes(4)) {
+        accessedRoutes = asyncRoutes4 || []
       }
+      // else {
+      //   accessedRoutes = filterAsyncRoutes(asyncRoutes, roles)
+      // }
       commit('SET_ROUTES', accessedRoutes)
       resolve(accessedRoutes)
     })
